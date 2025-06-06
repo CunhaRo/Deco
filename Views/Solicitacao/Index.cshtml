@@ -1,0 +1,126 @@
+﻿@model IEnumerable<Deco.Models.Entities.Solicitacao>
+
+@{
+    ViewData["Title"] = "Solicitação";
+}
+
+@section Head {
+
+    <link href="~/css/solicitacao/solicitacao.css" rel="stylesheet"/>
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb mb-0 pl-0">
+            <li class="breadcrumb-item"><a href="/"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+            <li class="breadcrumb-item active">Solicitar Demanda</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="text-center">
+    <h1 class="display-4">Demandas da Comunicação</h1>
+</div>
+
+<section class="section-cards" style="display: flex; justify-content: center; align-items: center; gap: 1.5rem; padding-top: 1rem;">
+    <a href="#" rel="noopener" data-bs-toggle="modal" data-bs-target="#modalDivulgacao" style="color: unset; text-decoration: none;">
+        <div class="card" style="width: 18rem; height: 147px; flex-direction: row;">
+            <img src="~/img/shared/icone-divulgar.png" class="card-img-top" alt="imagem representando uma lista de tarefas para o card" style="width: 6rem; margin-bottom: 1.5rem; margin-top: 1.5rem; margin-left: 1.5rem;">
+            <div class="card-body">
+                <h4>Divulgação</h4>
+                <p class="card-text">Solicite aqui uma divulgação.</p>
+            </div>
+        </div>
+    </a>
+    <a href="#" rel="noopener" data-bs-toggle="modal" data-bs-target="#modalArteMaterialGrafico" style="color: unset; text-decoration: none;">
+        <div class="card" style="width: 18rem; height: 147px; flex-direction: row;">
+            <img src="~/img/shared/icone-arte.png" class="card-img-top" alt="imagem representando uma lista de tarefas para o card" style="width: 6rem; margin-bottom: 1.5rem; margin-top: 1.5rem; margin-left: 1.5rem;">
+            <div class="card-body">
+                <h4>Arte/Material Gráfico</h4>
+                <p class="card-text">Solicite aqui uma Arte.</p>
+            </div>
+        </div>
+    </a>
+    <a href="#" rel="noopener" data-bs-toggle="modal" data-bs-target="#modalCobertura" style="color: unset; text-decoration: none;">
+        <div class="card" style="width: 18rem; height: 147px; flex-direction: row;">
+            <img src="~/img/shared/icone-cobertura1.png" class="card-img-top" alt="imagem representando uma lista de tarefas para o card" style="width: 6rem; margin-bottom: 1.5rem; margin-top: 1.5rem; margin-left: 1.5rem;">
+            <div class="card-body">
+                <h4>Cobertura</h4>
+                <p class="card-text">Solicite aqui uma cobertura.</p>
+            </div>
+        </div>
+    </a>
+</section>
+<h3 class="text-center">Minhas Solicitações</h3>
+@if (Model.Any())
+{
+<section class="section-solicitations card col-12" style="padding-top: 1rem;">
+    <table id="tabela-paginada" class="small table table-hover table-light table-sm table-striped dataTable no-footer dtr-inline">
+        <thead>
+            <tr>
+                <th scope="col">Data da Solicitação</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Responsável</th>
+                <th scope="col">Objetivo</th>
+                <th scope="col">Situação</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var solicitacao in Model)
+            {
+                <tr>
+                    <td>@solicitacao.DataDaSolicitacao.ToString("dd/MM/yyyy")</td>
+                    <td>@solicitacao.Tipo</td>
+                    <td>@solicitacao.Responsavel</td>
+                    <td>@solicitacao.Objetivo</td>
+                    <td>@solicitacao.Situacao</td>
+                    <td>
+                        <a href="" type="button" class="btn btn-primary btn-circle" title="Detalhar">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <button class="btn btn-primary btn-circle" data-solicitacao-id="@Model."><i class="fa fa-eye"></i></button>
+                            @if (!string.IsNullOrWhiteSpace(solicitacao.Situacao) && solicitacao.Situacao.Equals("Aguardando Atendimento"))
+                       {
+                                <a href="#" type="button" class="btn btn-dark btn-circle" title="Editar">
+                                    <i class="fa fa-pen"></i>
+                                </a>
+                       }
+
+                        @if (!string.IsNullOrWhiteSpace(solicitacao.Situacao) && solicitacao.Situacao.Equals("Concluída"))
+                        {
+                            <a href="#" type="button" class="btn btn-warning btn-circle" title="Avaliar">
+                                <i class="fa fa-star"></i>
+                            </a>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(solicitacao.Situacao) && solicitacao.Situacao.Equals("Aguardando Atendimento"))
+                        {
+                            <a href="#" type="button" class="btn btn-danger btn-circle" title="Remover">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </section>
+}
+else
+{
+    ﻿<div class="alert alert-info col-12 text-center">
+        <strong><i class="fa fa-info-circle" aria-hidden="true"></i> </strong>Nenhuma solicitação realizada.
+    </div>
+}
+
+<partial name="\Partials/_AdicionarDivulgacao" model="Model.FirstOrDefault()" />
+<partial name="\Partials/_AdicionarArteMaterialGrafico" model="Model.FirstOrDefault()" />
+<partial name="\Partials/_AdicionarCobertura" model="Model.FirstOrDefault()" />
+
+@section Scripts {
+    <partial name="Script\_datatables" />
+    <partial name="Script\_bootstrap-select" />
+    <partial name="Script\_jquery-mask" />
+
+    <script src="~/js/shared/tabela-paginacao.js"></script>
+}

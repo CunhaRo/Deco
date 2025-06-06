@@ -1,0 +1,95 @@
+﻿@model Deco.Models.Entities.Solicitacao
+
+<div class="modal fade" id="modalCobertura" tabindex="-1" aria-labelledby="modalCoberturaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCoberturaLabel">Solicitação de Cobertura</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <nav aria-label="breadcrumb" role="navigation">
+                        <ol class="breadcrumb mb-0 pl-2">
+                            <li class="breadcrumb-item"><a href="/"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                            <li class="breadcrumb-item active"><a asp-controller="solicitacao" asp-action="index">Solicitar Demanda</a></li>
+                            <li class="breadcrumb-item active">Cobertura</li>
+                        </ol>
+                    </nav>
+                </div>
+
+                <div class="container">
+                    <div class="mt-0">
+                        <h2 class="text-center pt-3">Solicitação de Cobertura</h2>
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-12 mt-2">
+                                    <form asp-controller="Solicitacao" asp-action="AdicionarCobertura" method="post">
+
+                                        <div class="form-row" style="display: flex; flex-direction: column; gap: 1rem;">
+
+                                            <div class="row g-3">
+                                                <div class="form-group col-12 col-md-6">
+                                                    <label asp-for="Telefone" class="control-label"></label>
+                                                    <input asp-for="Telefone" name="Telefone" type="text" class="form-control" required placeholder="Informe o Nº do Ramal ou Nº do Whatsapp para contato.">
+                                                    <span asp-validation-for="Telefone" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group col-12 col-md-6">
+                                                    <label asp-for="Cobertura.DataHoraDoEvento" class="control-label"></label>
+                                                    <input asp-for="Cobertura.DataHoraDoEvento" name="Cobertura.DataHoraDoEvento" type="datetime-local" class="form-control" id="input-filter-date" required>
+                                                    <span asp-validation-for="Cobertura.DataHoraDoEvento" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label asp-for="Cobertura.DescricaoDoEvento" class="control-label"></label>
+                                                <textarea asp-for="Cobertura.DescricaoDoEvento" name="Cobertura.DescricaoDoEvento" type="text" class="form-control" required placeholder="Informe a descrição do evento." rows="8" id="MessageInputField" autofocus></textarea>
+                                                <span asp-validation-for="Cobertura.DescricaoDoEvento" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label asp-for="Cobertura.Local" class="control-label"></label>
+                                                <input asp-for="Cobertura.Local" name="Cobertura.Local" type="text" class="form-control" required placeholder="Informe o Local do Evento.">
+                                                <span asp-validation-for="Cobertura.Local" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label asp-for="Cobertura.NumeroDeParticipante" class="control-label"></label>
+                                                <input asp-for="Cobertura.NumeroDeParticipante" name="Cobertura.NumeroDeParticipante" type="number" class="form-control" required placeholder="Informe o Número Total de participantes.">
+                                                <span asp-validation-for="Cobertura.NumeroDeParticipante" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <label asp-for="Cobertura.MembroPresente" class="control-label"></label>
+                                                <textarea asp-for="Cobertura.MembroPresente" name="Cobertura.MembroPresente" type="text" class="form-control" required placeholder="Informe os membros presentes" rows="8" id="MessageInputField" autofocus></textarea>
+                                                <span asp-validation-for="Cobertura.MembroPresente" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <p>A solicitação está aprovada pelo seu gestor imediato?</p>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" asp-for="IsAprovadaPeloGestor" type="radio" value="true" id="Sim">
+                                                    <label class="form-check-label" for="Sim">Sim</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" asp-for="IsAprovadaPeloGestor" type="radio" value="false" id="Nao">
+                                                    <label class="form-check-label" for="Nao">Não</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12 col-md-6 mx-auto d-flex justify-content-center gap-2">
+                                                <a asp-controller="solicitacao" asp-action="index" rel="noopener" class="btn btn-primary btn-round btn-block">
+                                                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Cancelar
+                                                </a>
+                                                <button type="submit" class="btn btn-success btn-round btn-block">
+                                                    <i class="fa fa-save" aria-hidden="true"></i> Enviar
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

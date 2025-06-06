@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section Head {
+
+    <link href="~/css/solicitacao/index.css" rel="stylesheet">
+}
+
+<div class="text-center">
+    <h1 class="display-4">Demandas da Comunicação</h1>
+    <p>Gerenciador de Ordens de Solicitação para o Serviço de Comunicação da CGE-RO</p>
+</div>
+
+<section class="section-cards" style="display: flex; justify-content: center; align-items: center; gap: 1.5rem; padding-top: 1rem;">
+    <a asp-controller="solicitacao" asp-action="index" rel="noopener" style="color: unset; text-decoration: none;">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top d-block mx-auto" src="~/img/shared/icone-demanda1.png" alt="Imagem de capa do card" style="width: 8rem; margin-top: 1.5rem; margin-bottom: 1.5rem;">
+            <div class="card-body" style="background-color: #e0f2fe;">
+                <p class="card-text text-primary fw-semibold" style="text-align:center">Solicitar nova demanda de comunicação</p>
+            </div>
+        </div>
+    </a>
+
+
+    <a asp-controller="solicitacao" asp-action="index" rel="noopener" style="color: unset; text-decoration: none;">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top d-block mx-auto" src="~/img/shared/icone-documentacao.png" alt="Imagem de capa do card" style="width: 8rem; margin-top: 1.5rem; margin-bottom: 1.5rem;">
+            <div class="card-body" style="background-color: #e0f2fe;">
+                <p class="card-text text-primary fw-semibold" style="text-align:center">Veja aqui o manual de instruções para realizar solicitações</p>
+            </div>
+        </div>
+    </a>
+
+
+</section>

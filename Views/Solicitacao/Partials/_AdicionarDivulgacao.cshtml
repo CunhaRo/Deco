@@ -1,0 +1,125 @@
+﻿@model Deco.Models.Entities.Solicitacao
+@section Head {
+    <link href="~/lib/dropzone/dropzone.css" />
+}
+
+<div class="modal fade" id="modalDivulgacao" tabindex="-1" aria-labelledby="modalDivulgacaoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="alert alert-primary"  role="alert">
+                    <strong>Dicas para sua solicitação:</strong>
+                    <p>Especifique detalhadamente sua demanda, incluindo nome da ação, data, local, horário, pessoas envolvidas, objetivo e outras informações relevantes.</p>
+                </div>
+                <div class="container">
+                    <div class="mt-0">
+                        <h2 class="text-center pt-3">Solicitação de Divulgação</h2>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 mt-2">
+                                    <form asp-controller="Solicitacao" asp-action="AdicionarDivulgacao" method="post">
+                                        <div class="form-row" style="display: flex; flex-direction: column; gap: 1rem;">
+                                            <div class="row g-3">
+                                                <div class="col-12 col-md-6">
+                                                     <label asp-for="Responsavel" class="form-label">Responsavel <i style="color: red;">*</i></label>
+                                                        <div class="p-3 rounded border shadow-sm bg-light">
+                                                            <input asp-for="Responsavel" name="Responsavel" type="text" class="form-control border-0 bg-light" required placeholder="Pessoas, grupo, entidade" autocomplete="Responsavel" />
+                                                        </div>
+                                                             <span asp-validation-for="Responsavel" class="text-danger"></span>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                        <label asp-for="Email" class="form-label">E-mail <i style="color: red;">*</i></label>
+                                                        <div class="p-3 rounded border shadow-sm bg-light">
+                                                            <input asp-for="Email" name="Email" type="email" class="form-control border-0 bg-light" required placeholder="Informe o e-mail" autocomplete="email" />
+                                                         </div>
+                                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label asp-for="Objetivo" class="form-label">Justificativa<i style="color: red;">*</i></label>
+                                                    <div class="p-3 rounded border shadow-sm bg-light">
+                                                        <input asp-for="Objetivo" name="Objetivo" type="text" class="form-control border-0 bg-light" required placeholder="Justificativa ou Objetivo" autocomplete="Objetivo" />
+                                                    </div>
+                                                    <span asp-validation-for="Objetivo" class="text-danger"></span>
+                                                </div>
+                                                <div class="col-12 col-md-4">
+                                                        <label asp-for="Telefone" class="form-label">Telefone<i style="color: red;">*</i></label>
+                                                    <div class="p-3 rounded border shadow-sm bg-light">
+                                                        <input asp-for="Telefone" name="Telefone" type="tel" maxlength="15" onkeyup="handlePhone(event)" class="form-control border-0 bg-light" required placeholder="Ex: 69 3333-3333" />
+                                                    </div>
+                                                        <span asp-validation-for="Telefone" class="text-danger"></span>
+                                                </div>
+
+                                                <div class="col-12 col-md-4">
+                                                        <label asp-for="Whatsapp" class="form-label">Whatsapp</label>
+                                                    <div class="p-3 rounded border shadow-sm bg-light">
+                                                        <input asp-for="Whatsapp" name="Whatsapp" type="text" class="form-control border-0 bg-light" required placeholder="Ex: 69 99999-9999" />
+                                                    </div>
+                                                        <span asp-validation-for="Whatsapp" class="text-danger"></span>
+                                                </div>
+                                                <div class="col-12 col-md-4">
+                                                    <label asp-for="Divulgacao.DataHoraDaPublicacao" class="form-label">Expectativa de Atendimento<i style="color:red;">*</i></label>
+                                                    <div class="p-3 rounded border shadow-sm bg-light">
+                                                        <input asp-for="Divulgacao.DataHoraDaPublicacao" name="Divulgacao.DataHoraDaPublicacao" type="datetime-local" class="form-control border-0 bg-light" id="input-filter-date" required />
+                                                    </div>
+                                                    <span asp-validation-for="Divulgacao.DataHoraDaPublicacao" class="text-danger"></span>
+                                                </div>
+                                                <div class="col-12">
+                                                <label asp-for="Divulgacao.Mensagem" class="form-label">Descrição<i style="color:red;">*</i></label>
+                                                <div class="p-3 rounded border shadow-sm bg-light">
+                                                    <textarea asp-for="Divulgacao.Mensagem" name="Divulgacao.Mensagem" class="form-control border-0 bg-light" placeholder="Descreva o que e como deverá ser feito, a mensagem a ser comunicada, incluindo nome da ação, data, local, horário, objetivo e outras informações relevantes." rows="6" id="MessageInputField" requiredautofocus></textarea>
+                                                </div>
+                                                <span asp-validation-for="Divulgacao.Mensagem" class="text-danger"></span>
+                                                </div>
+                                                
+                                                <div class="form-group col-sm-12">
+                                                    <p>Divulgação:</p>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="checkbox" asp-for="IsAprovadaPeloGestor" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Site</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="checkbox" asp-for="IsAprovadaPeloGestor" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Redes Sociais</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="checkbox" asp-for="IsAprovadaPeloGestor" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Impressão</label>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-12">
+                                                    <label for="image_uploads" class="form-label">
+                                                        <i class="@UtilsIcons.PaperClip"></i> Inserir Anexo (PNG, JPG, PDF, ZIP)
+                                                    </label>
+                                                    <input type="file" id="image_uploads" name="image_uploads" class="form-control" accept=".jpg, .jpeg, .png, .pdf, .zip" multiple>
+                                                    <div class="form-text text-muted">Nenhum arquivo selecionado para upload no momento.</div>
+                                                </div>
+
+                                                <div class="form-group col-sm-12 col-md-6 mx-auto d-flex justify-content-center gap-2">
+                                                    <a asp-controller="Solicitacao" asp-action="Index" class="btn btn-outline-danger">
+                                                        <i class="fa fa-arrow-left"></i> Cancelar
+                                                    </a>
+                                                    <button type="submit" class="btn btn-success">
+                                                        <i class="fa fa-save"></i> Enviar
+                                                    </button>
+                                                </div>
+                                          </div>
+                                       </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/js/demandas/divulgacao.js"></script>
+}

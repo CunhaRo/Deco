@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deco - Sistema de Demandas da Comunicação</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Deco.styles.css" asp-append-version="true" />
+
+    <partial name="\PartialsLayout\_ReferenciasCSS" />
+
+    @RenderSection("Head", required: false)
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/shared/logo-cge-ro.png" title="" rel="noopener" style="height: 2rem; width: 5.8rem;" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav" style="margin-left: auto;">
+                        <li class="nav-item dropdown text-center">
+                            <a rel="noopener" class="nav-link" href="#!" id="altoContraste" accesskey="4" title="alto contraste">
+                                <i class="fa fa-adjust"></i>
+                                <span class="legend d-none d-lg-inline-block">
+                                    Alto Contraste
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Usuário Teste
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Sair</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="d-flex">
+        @*         <nav id="sidebar" class="border-end" style="position: fixed; top: 6rem; left: 0; bottom: 0; height: 15rem; background: white !important; border-right: none !important;">
+        <ul class="nav flex-column p-3" style="min-width: 220px;">
+        <li class="nav-item">
+        <div class="nav-link active">
+        MENU
+        </div>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link active" asp-controller="Home" asp-action="Index">
+        <i class="fas fa-home"></i>
+        Início
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">
+        <i class="fas fa-clipboard-list"></i>
+        Solicitar Demanda
+        </a>
+        </li>
+        </ul>
+        </nav> *@
+
+        <div class="flex-grow-1 p-3">
+            <main role="main" style="margin-top: 6rem; margin-bottom: 6rem;">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+
+    <footer class="border-top footer text-muted">
+        <div class="container text-center">
+            Diretoria de Transparência e Governo Aberto | CGE-RO
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <partial name="\PartialsLayout\_ReferenciasScript" />
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
